@@ -15,7 +15,7 @@ class Sketchy(object):
 		self.batch_size = 8
 
 		self.model = ResnetBuilder.build_resnet_50( self.ip_size, self.op_size )
-		self.model.compile( loss = 'binary_crossentropy', optimizer = 'rmsprop')
+		self.model.compile( loss = 'binary_crossentropy', optimizer = 'rmsprop', metrics = ['accuracy'])
 
 		self.class_id = 0
 		self.dict = {}
@@ -39,7 +39,7 @@ class Sketchy(object):
 				self.files[0].append( "../../png/"+x )
 				self.files[1].append( path[0] )
 
-		# print(self.dict)
+		print(self.dict)
 
 	def train_model(self):
 		
@@ -81,5 +81,5 @@ class Sketchy(object):
 
 
 obj = Sketchy("../splits/train.txt", "../splits/test.txt")
-obj.train_model()
+# obj.train_model()
 
