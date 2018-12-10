@@ -47,7 +47,7 @@ Sample results:
 ![alt text](https://github.com/surabhibhargava/cs4731/blob/master/ImageGeneration/sample_results/trees.png "Tree")
 
 References: </br>
--Sketchy Database: http://sketchy.eye.gatech.edu/
+- Sketchy Database: http://sketchy.eye.gatech.edu/
 - Image to Image translation: https://arxiv.org/abs/1611.07004, https://github.com/prashnani/, https://phillipi.github.io/pix2pix/
 
 
