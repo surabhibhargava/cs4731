@@ -2,9 +2,9 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.image as img_mat
-from PIL import Image
+
 import cv2
-from scipy.ndimage.morphology import distance_transform_edt as dt
+
 def concat_images(imga, imgb):
     """
     Combines two color image ndarrays side-by-side.
