@@ -15,7 +15,8 @@
 
 2) Run the script sketchy_data_prep.py to generate concatenated image sketch pairs needed for training. This computes distance transform of sketch and concatenates the image and sketch together.(The paths need to be modified to point to correct locations on the machine)
 
-An image generated from this step should look like:
+An image generated from this step should look like:</br>
+
 ![alt text](https://github.com/surabhibhargava/cs4731/blob/master/ImageGeneration/sketchy_concat/butterfly/n02274259_1147-1.jpg)
 
 3) Run data_split.py to generate train, test and val splits with sketchy. (The paths need to be modified to point to correct locations on the machine)
