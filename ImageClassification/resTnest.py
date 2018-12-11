@@ -3,6 +3,8 @@ import cv2
 import matplotlib as plt
 import numpy as np
 from keras.layers import Input, Dense
+from scipy.misc import imread
+import matplotlib.pyplot as plt
 from keras.models import *
 import sys
 import os, errno
@@ -13,8 +15,8 @@ class Sketchy(object):
 
 	def __init__(self, train_data, test_data, im_path, op_dir_path, batch_size):
 
-		self.im_size = 1111
-		self.ip_size = ( self.im_size, self.im_size)
+		self.im_size = 128
+		self.ip_size = ( self.im_size, self.im_size, 1)
 		self.batch_size = int(batch_size)
 		# self.op_size = 1
 		self.class_id = 0
@@ -58,7 +60,7 @@ class Sketchy(object):
 
 		print("Model initialized")
 		
-		im = np.zeros( (self.batch_size , self.im_size, self.im_size, 3) )
+		im = np.zeros( (self.batch_size , self.im_size, self.im_size) )
 		i = 0
 		# print("image", len( self.files[0] ))
 		while ( i < len( self.files[0] ) ):
@@ -74,12 +76,15 @@ class Sketchy(object):
 				
 				print("reading", self.files[0][ i + b ])
 				
-				im [b] = cv2.imread(self.files[0][ i + b ])
-				# im[b] = cv2.resize(big_image, (self.im_size, self.im_size), interpolation = cv2.INTER_CUBIC)
+				# im [b] = cv2.imread(self.files[0][ i + b ])
+				big_image = imread(self.files[0][ i + b ], mode='L')
+				kernel = np.ones((7,7), np.uint8)
+				big_image = cv2.erode(big_image, kernel, iterations = 1)
+				im[b] = cv2.resize(big_image, (self.im_size, self.im_size), interpolation = cv2.INTER_CUBIC)
 				op [b] [self.dict [ self.files[1][ i + b ] ] ] = 1.0
 				print(self.files[0][ i + b ], self.files[1][ i + b ] ,self.dict[self.files[1][ i + b ]])
 				# cv2.imshow( "shit",im[ b ] )
-				# cv2.waitKey()
+				# cv2.waitKey(100)
 				
 
 			i += self.batch_size

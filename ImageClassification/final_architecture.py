@@ -34,15 +34,15 @@ os.environ["CUDA_VISIBLE_DEVICES"] = ''
 # In[2]:
 
 
-def get_data(num_classes=250, res=128, flip=False, color_invert=False, center=True):
+def get_data(num_classes=250, res=128, flip=True, color_invert=False, center=True):
     # root_dir = "data/png{}/".format("" if res is None else res)
     # root_dir = "/home/sb4019/project/png{}/".format("" if res is None else res)
-    root_dir = "/Users/chanddra/Columbia/SEM1/CV/Sketchy/png/"
+    root_dir = "../png/"
 
     num_train = 48
     # num_train = 96 if flip else 48
-    num_val = 15
-    num_test = 15
+    num_val = 16
+    num_test = 16
     # num_val = 16
     # num_test = 16
 
@@ -253,7 +253,7 @@ lr = tf.placeholder(tf.float32)
 reg = tf.placeholder(tf.float32)
 
 # y_out = naive_model(X, y)
-y_out = resnet_dropout(X, y, layer_depth=3, num_classes=num_classes, is_training=is_training, reg=reg)
+y_out = resnet_dropout(X, y, layer_depth=2, num_classes=num_classes, is_training=is_training, reg=reg)
 # print (y_out.shape)
 mean_loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=tf.one_hot(y, num_classes), logits=y_out))
 optimizer = tf.train.AdamOptimizer(learning_rate=lr)
@@ -349,9 +349,9 @@ saver = tf.train.Saver()
 # In[ ]:
 
 
-epochs = 1
+epochs = 20
 reg_val = 1e-1
-learning_rate = 1e-3
+learning_rate = 3e-3
 
 # tf.reset_default_graph()  
 # imported_meta = tf.train.import_meta_graph("../../../0.5429333333333334model.ckpt.meta")  
@@ -411,9 +411,9 @@ for i in range(epochs):
                              training=None,
                              plot_losses=False)
     if not val_acc:
-        save_path = saver.save(sess, "/Users/chanddra/Columbia/SEM1/CV/"+str(acc)+"model.ckpt")
+        save_path = saver.save(sess, "../"+str(acc)+"model.ckpt")
     elif acc > max_acc:
-        save_path = saver.save(sess, "/Users/chanddra/Columbia/SEM1/CV/"+str(acc)+"model.ckpt")
+        save_path = saver.save(sess, "../"+str(acc)+"model.ckpt")
     max_acc = max(max_acc, acc)
     val_losses.append(loss)
     val_acc.append(acc)

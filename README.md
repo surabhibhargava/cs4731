@@ -1,5 +1,22 @@
 # Classification and Image Generation from Sketches
 
+## Image Classification
+
+### Dependencies
+- Tensorflow
+- numpy 
+- keras
+- matplotlib
+- opencv-python
+- scikit-learn
+- skimage
+
+### Steps to set up training
+1) Download the TU Berlin database from (http://cybertron.cg.tu-berlin.de/eitz/projects/classifysketch/sketches_png.zip) and unzip the folder and place it in cs4731 folder.
+
+2) Run the script final_architecture.py to start the training on the final architecture. We have included the code used for training ResNet CNN as well.
+
+
 ## Image Generation
 
 ### Dependencies
